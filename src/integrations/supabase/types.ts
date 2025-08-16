@@ -14,7 +14,131 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      badges: {
+        Row: {
+          created_at: string
+          full_name: string
+          id: string
+          output_url: string | null
+          photo_url: string | null
+          role: string
+          template_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          full_name: string
+          id?: string
+          output_url?: string | null
+          photo_url?: string | null
+          role: string
+          template_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          id?: string
+          output_url?: string | null
+          photo_url?: string | null
+          role?: string
+          template_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "badges_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      templates: {
+        Row: {
+          created_at: string
+          file_url: string
+          height: number
+          id: string
+          is_official: boolean
+          name: string
+          name_color: string
+          name_h: number
+          name_max_size: number
+          name_w: number
+          name_weight: string
+          name_x: number
+          name_y: number
+          photo_h: number
+          photo_radius: number
+          photo_w: number
+          photo_x: number
+          photo_y: number
+          role_color: string
+          role_h: number
+          role_max_size: number
+          role_w: number
+          role_weight: string
+          role_x: number
+          role_y: number
+          width: number
+        }
+        Insert: {
+          created_at?: string
+          file_url: string
+          height?: number
+          id?: string
+          is_official?: boolean
+          name: string
+          name_color?: string
+          name_h: number
+          name_max_size?: number
+          name_w: number
+          name_weight?: string
+          name_x: number
+          name_y: number
+          photo_h: number
+          photo_radius: number
+          photo_w: number
+          photo_x: number
+          photo_y: number
+          role_color?: string
+          role_h: number
+          role_max_size?: number
+          role_w: number
+          role_weight?: string
+          role_x: number
+          role_y: number
+          width?: number
+        }
+        Update: {
+          created_at?: string
+          file_url?: string
+          height?: number
+          id?: string
+          is_official?: boolean
+          name?: string
+          name_color?: string
+          name_h?: number
+          name_max_size?: number
+          name_w?: number
+          name_weight?: string
+          name_x?: number
+          name_y?: number
+          photo_h?: number
+          photo_radius?: number
+          photo_w?: number
+          photo_x?: number
+          photo_y?: number
+          role_color?: string
+          role_h?: number
+          role_max_size?: number
+          role_w?: number
+          role_weight?: string
+          role_x?: number
+          role_y?: number
+          width?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
