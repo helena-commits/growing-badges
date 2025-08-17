@@ -93,7 +93,7 @@ export function drawTextFit(
   
   // Find the largest font size that fits
   while (fontSize >= minSize) {
-    ctx.font = `${weight} ${fontSize}px Inter, sans-serif`;
+    ctx.font = `${weight} ${fontSize}px Arial, sans-serif`;
     const metrics = ctx.measureText(text);
     const textWidth = metrics.width;
     const textHeight = fontSize * 1.2; // Approximate line height
@@ -105,7 +105,7 @@ export function drawTextFit(
     fontSize -= 2;
   }
   
-  ctx.font = `${weight} ${fontSize}px Inter, sans-serif`;
+  ctx.font = `${weight} ${fontSize}px Arial, sans-serif`;
   
   // Draw the text centered in the box
   const centerX = box.x + box.w / 2;
