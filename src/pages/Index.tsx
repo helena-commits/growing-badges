@@ -192,7 +192,7 @@ const Index = () => {
                   placeholder="Função desempenhada"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="h-12 text-base border-primary/20 focus:border-primary/40 bg-background/80"
+                  className="h-12 text-base border-primary/20 focus:border-primary/40 bg-background/80 w-full overflow-hidden"
                 />
               </div>
 
