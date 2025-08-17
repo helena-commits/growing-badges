@@ -12,6 +12,7 @@ import { createSlug } from '@/lib/canvas-utils';
 import { toast } from 'sonner';
 import { Download, Eye, AlertTriangle, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import logoImage from '@/assets/logo.png';
 
 const Index = () => {
   const [template, setTemplate] = useState<Template | null>(null);
@@ -126,17 +127,23 @@ const Index = () => {
       <div className="max-w-7xl mx-auto space-y-8 p-4">
         {/* Header */}
         <div className="text-center space-y-6">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-            Gerador de Crachá
-          </h1>
-          <div className="text-2xl font-semibold text-primary">Bernhoeft GRT</div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <h1 className="text-4xl md:text-5xl font-bold" style={{ color: '#1c195c' }}>
+              Gerador de Crachá
+            </h1>
+            <img 
+              src={logoImage} 
+              alt="Logo" 
+              className="h-12 md:h-16 w-auto"
+            />
+          </div>
+          <p className="text-xl max-w-2xl mx-auto" style={{ color: '#9b26b5' }}>
             Faça upload da sua foto, preencha seus dados e baixe seu crachá personalizado com nossa tecnologia avançada
           </p>
           
           <div className="flex justify-center">
             <Link to="/admin">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" style={{ borderColor: '#0b233f', color: '#0b233f' }}>
                 <Settings className="w-4 h-4 mr-2" />
                 Painel Administrativo
               </Button>
@@ -160,7 +167,7 @@ const Index = () => {
           {/* Form */}
           <Card className="shadow-elegant border-primary/10 bg-card/80 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-primary">Dados do Crachá</CardTitle>
+              <CardTitle style={{ color: '#0b233f' }}>Dados do Crachá</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Photo Upload */}
@@ -238,7 +245,7 @@ const Index = () => {
           {/* Preview */}
           <Card className="shadow-elegant border-primary/10 bg-card/80 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-primary">Pré-visualização</CardTitle>
+              <CardTitle style={{ color: '#9b26b5' }}>Pré-visualização</CardTitle>
             </CardHeader>
             <CardContent>
               {isFormValid ? (

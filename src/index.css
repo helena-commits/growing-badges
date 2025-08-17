@@ -14,11 +14,11 @@ All colors MUST be HSL.
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 295 85% 60%;
+    --primary: 238 72% 22%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 308 100% 75%;
-    --secondary: 295 20% 96%;
-    --secondary-foreground: 295 85% 25%;
+    --primary-glow: 294 76% 44%;
+    --secondary: 217 27% 84%;
+    --secondary-foreground: 207 74% 15%;
     --muted: 295 15% 96%;
     --muted-foreground: 295 20% 45%;
     --accent: 308 70% 85%;
