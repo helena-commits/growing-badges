@@ -150,18 +150,23 @@ export default function Admin() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen bg-gradient-to-br from-background via-secondary/30 to-accent/20 p-4">
       <div className="max-w-6xl mx-auto space-y-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold">Gerador de Crachá – We Grow</h1>
-          <p className="text-muted-foreground mt-2">Painel Administrativo</p>
+        <div className="text-center space-y-4">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+            Administração
+          </h1>
+          <div className="text-xl font-semibold text-primary">Templates de Crachá - We Grow</div>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Gerencie e configure os templates oficiais para geração de crachás
+          </p>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Template Form */}
-          <Card>
+          <Card className="shadow-elegant border-primary/10 bg-card/80 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle>Novo Template</CardTitle>
+              <CardTitle className="text-primary">Novo Template</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Basic Info */}
@@ -359,9 +364,9 @@ export default function Admin() {
           </Card>
 
           {/* Preview */}
-          <Card>
+          <Card className="shadow-elegant border-primary/10 bg-card/80 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle>Pré-visualização</CardTitle>
+              <CardTitle className="text-primary">Pré-visualização</CardTitle>
             </CardHeader>
             <CardContent>
               {templateUrl ? (
@@ -384,9 +389,9 @@ export default function Admin() {
         </div>
 
         {/* Templates List */}
-        <Card>
+        <Card className="shadow-elegant border-primary/10 bg-card/80 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle>Templates Salvos</CardTitle>
+            <CardTitle className="text-primary">Templates Salvos</CardTitle>
           </CardHeader>
           <CardContent>
             {templates.length === 0 ? (

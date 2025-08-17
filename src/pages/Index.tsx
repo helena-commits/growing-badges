@@ -122,13 +122,16 @@ const Index = () => {
   const isFormValid = photoFile && name.trim() && role.trim();
 
   return (
-    <div className="min-h-screen bg-background p-4">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-background via-secondary/30 to-accent/20">
+      <div className="max-w-7xl mx-auto space-y-8 p-4">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold">Gerador de Crachá – We Grow</h1>
-          <p className="text-xl text-muted-foreground">
-            Faça upload da sua foto, preencha seus dados e baixe seu crachá personalizado
+        <div className="text-center space-y-6">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+            Gerador de Crachá
+          </h1>
+          <div className="text-2xl font-semibold text-primary">We Grow</div>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Faça upload da sua foto, preencha seus dados e baixe seu crachá personalizado com nossa tecnologia avançada
           </p>
           
           <div className="flex justify-center">
@@ -155,9 +158,9 @@ const Index = () => {
 
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Form */}
-          <Card>
+          <Card className="shadow-elegant border-primary/10 bg-card/80 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle>Dados do Crachá</CardTitle>
+              <CardTitle className="text-primary">Dados do Crachá</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Photo Upload */}
@@ -171,23 +174,25 @@ const Index = () => {
 
               {/* Name */}
               <div>
-                <Label htmlFor="name">Nome</Label>
+                <Label htmlFor="name" className="text-foreground font-medium">Nome</Label>
                 <Input
                   id="name"
                   placeholder="Nome do funcionário"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  className="h-12 text-base border-primary/20 focus:border-primary/40 bg-background/80"
                 />
               </div>
 
               {/* Role */}
               <div>
-                <Label htmlFor="role">Função</Label>
+                <Label htmlFor="role" className="text-foreground font-medium">Função</Label>
                 <Input
                   id="role"
                   placeholder="Função desempenhada"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
+                  className="h-12 text-base border-primary/20 focus:border-primary/40 bg-background/80"
                 />
               </div>
 
@@ -204,10 +209,12 @@ const Index = () => {
               </div>
 
               {/* Actions */}
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <Button
                   onClick={handleGeneratePreview}
                   disabled={!isFormValid}
+                  variant="premium"
+                  size="lg"
                   className="w-full"
                 >
                   <Eye className="w-4 h-4 mr-2" />
@@ -217,7 +224,8 @@ const Index = () => {
                 <Button
                   onClick={handleDownload}
                   disabled={!canDownload || loading}
-                  variant="default"
+                  variant="outline"
+                  size="lg"
                   className="w-full"
                 >
                   <Download className="w-4 h-4 mr-2" />
@@ -228,9 +236,9 @@ const Index = () => {
           </Card>
 
           {/* Preview */}
-          <Card>
+          <Card className="shadow-elegant border-primary/10 bg-card/80 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle>Pré-visualização</CardTitle>
+              <CardTitle className="text-primary">Pré-visualização</CardTitle>
             </CardHeader>
             <CardContent>
               {isFormValid ? (

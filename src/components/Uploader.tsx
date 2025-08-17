@@ -75,11 +75,11 @@ export function Uploader({
       <Label htmlFor="file-input">{label}</Label>
       
       {!file ? (
-        <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-          <Upload className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-          <div className="space-y-2">
+        <div className="border-2 border-dashed border-primary/30 rounded-xl p-8 text-center bg-gradient-to-br from-secondary/20 to-accent/10 hover:border-primary/50 transition-all duration-300">
+          <Upload className="mx-auto h-12 w-12 text-primary mb-4" />
+          <div className="space-y-3">
             <Label htmlFor="file-input" className="cursor-pointer">
-              <Button variant="outline" className="pointer-events-none">
+              <Button variant="premium" className="pointer-events-none">
                 Selecionar arquivo
               </Button>
             </Label>
@@ -99,18 +99,20 @@ export function Uploader({
       ) : (
         <div className="space-y-4">
           {preview && previewUrl && (
-            <div className="relative border rounded-lg p-4 bg-muted/10">
+            <div className="relative border-2 border-primary/20 rounded-xl p-4 bg-gradient-to-br from-secondary/20 to-accent/10">
               <img 
                 src={previewUrl} 
                 alt="Preview" 
-                className="max-w-full max-h-32 mx-auto rounded"
+                className="max-w-full max-h-32 mx-auto rounded-lg shadow-lg"
               />
             </div>
           )}
           
-          <div className="flex items-center justify-between p-3 border rounded-lg bg-muted/10">
+          <div className="flex items-center justify-between p-4 border border-primary/20 rounded-xl bg-gradient-to-r from-secondary/30 to-accent/20">
             <div className="flex items-center space-x-3">
-              <ImageIcon className="h-8 w-8 text-muted-foreground" />
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-primary to-primary-glow flex items-center justify-center">
+                <ImageIcon className="h-5 w-5 text-primary-foreground" />
+              </div>
               <div>
                 <p className="text-sm font-medium">{file.name}</p>
                 <p className="text-xs text-muted-foreground">
