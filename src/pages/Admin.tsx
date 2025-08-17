@@ -15,6 +15,13 @@ import {
   setOfficialTemplate, 
   deleteTemplate 
 } from '@/lib/supabase';
+import { 
+  TemplateBack,
+  listBackTemplates,
+  saveBackTemplate,
+  setOfficialBackTemplate,
+  deleteBackTemplate
+} from '@/lib/supabase-back';
 import { toast } from 'sonner';
 import { Trash2, Star, Upload } from 'lucide-react';
 
@@ -44,9 +51,26 @@ const DEFAULT_LAYOUT = {
 
 export default function Admin() {
   const [templates, setTemplates] = useState<Template[]>([]);
+  const [backTemplates, setBackTemplates] = useState<TemplateBack[]>([]);
   const [currentTemplate, setCurrentTemplate] = useState<Partial<Template>>(DEFAULT_LAYOUT);
+  const [currentBackTemplate, setCurrentBackTemplate] = useState<Partial<TemplateBack>>({
+    name: '',
+    file_url: '',
+    width: 1024,
+    height: 1536,
+    name_x: 160,
+    name_y: 200,
+    name_w: 704,
+    name_h: 65,
+    name_color: '#111111',
+    name_weight: '700',
+    name_max_size: 40,
+    is_official: false
+  });
   const [templateFile, setTemplateFile] = useState<File | null>(null);
   const [templateUrl, setTemplateUrl] = useState<string>('');
+  const [backTemplateFile, setBackTemplateFile] = useState<File | null>(null);
+  const [backTemplateUrl, setBackTemplateUrl] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

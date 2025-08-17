@@ -36,6 +36,7 @@ export interface Badge {
   photo_url?: string;
   template_id?: string;
   output_url?: string;
+  back_output_url?: string;  // Added for back side
   created_at: string;
 }
 
