@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       badges: {
         Row: {
+          back_output_url: string | null
           created_at: string
           full_name: string
           id: string
@@ -25,6 +26,7 @@ export type Database = {
           template_id: string | null
         }
         Insert: {
+          back_output_url?: string | null
           created_at?: string
           full_name: string
           id?: string
@@ -34,6 +36,7 @@ export type Database = {
           template_id?: string | null
         }
         Update: {
+          back_output_url?: string | null
           created_at?: string
           full_name?: string
           id?: string
@@ -135,6 +138,57 @@ export type Database = {
           role_weight?: string
           role_x?: number
           role_y?: number
+          width?: number
+        }
+        Relationships: []
+      }
+      templates_back: {
+        Row: {
+          created_at: string
+          file_url: string
+          height: number
+          id: string
+          is_official: boolean
+          name: string
+          name_color: string
+          name_h: number
+          name_max_size: number
+          name_w: number
+          name_weight: string
+          name_x: number
+          name_y: number
+          width: number
+        }
+        Insert: {
+          created_at?: string
+          file_url: string
+          height?: number
+          id?: string
+          is_official?: boolean
+          name: string
+          name_color?: string
+          name_h: number
+          name_max_size?: number
+          name_w: number
+          name_weight?: string
+          name_x: number
+          name_y: number
+          width?: number
+        }
+        Update: {
+          created_at?: string
+          file_url?: string
+          height?: number
+          id?: string
+          is_official?: boolean
+          name?: string
+          name_color?: string
+          name_h?: number
+          name_max_size?: number
+          name_w?: number
+          name_weight?: string
+          name_x?: number
+          name_y?: number
           width?: number
         }
         Relationships: []
