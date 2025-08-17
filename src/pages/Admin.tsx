@@ -22,6 +22,7 @@ import {
   setOfficialBackTemplate,
   deleteBackTemplate
 } from '@/lib/supabase-back';
+import { AdminBackSection } from '@/components/AdminBackSection';
 import { toast } from 'sonner';
 import { Trash2, Star, Upload } from 'lucide-react';
 
@@ -75,7 +76,13 @@ export default function Admin() {
 
   useEffect(() => {
     loadTemplates();
+    loadBackTemplates();
   }, []);
+
+  const loadBackTemplates = async () => {
+    const data = await listBackTemplates();
+    setBackTemplates(data);
+  };
 
   const loadTemplates = async () => {
     const data = await listTemplates();
@@ -415,7 +422,7 @@ export default function Admin() {
         {/* Templates List */}
         <Card className="shadow-elegant border-primary/10 bg-card/80 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-primary">Templates Salvos</CardTitle>
+            <CardTitle className="text-primary">Templates da Frente Salvos</CardTitle>
           </CardHeader>
           <CardContent>
             {templates.length === 0 ? (
@@ -472,6 +479,12 @@ export default function Admin() {
             )}
           </CardContent>
         </Card>
+
+        {/* Back Template Section */}
+        <AdminBackSection 
+          backTemplates={backTemplates}
+          onTemplatesChange={loadBackTemplates}
+        />
       </div>
     </div>
   );
