@@ -21,13 +21,13 @@ export function AdminBackSection({ backTemplates, onTemplatesChange }: AdminBack
     file_url: '',
     width: 1024,
     height: 1536,
-    name_x: 114,
-    name_y: 180,
-    name_w: 482,
-    name_h: 32,
+    name_x: 264,
+    name_y: 244,
+    name_w: 460,
+    name_h: 28,
     name_color: '#000000',
     name_weight: '600',
-    name_max_size: 24,
+    name_max_size: 20,
     is_official: false
   });
   const [backTemplateUrl, setBackTemplateUrl] = useState<string>('');
@@ -65,13 +65,13 @@ export function AdminBackSection({ backTemplates, onTemplatesChange }: AdminBack
         file_url: '',
         width: 1024,
         height: 1536,
-        name_x: 114,
-        name_y: 180,
-        name_w: 482,
-        name_h: 32,
+        name_x: 264,
+        name_y: 244,
+        name_w: 460,
+        name_h: 28,
         name_color: '#000000',
         name_weight: '600',
-        name_max_size: 24,
+        name_max_size: 20,
         is_official: false
       });
       setBackTemplateUrl('');
