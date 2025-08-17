@@ -109,13 +109,13 @@ export async function initializeDefaultBackTemplate(): Promise<void> {
       file_url: '/assets/badge-back-template.png',
       width: 1024,
       height: 1536,
-      name_x: 150,
-      name_y: 100,
-      name_w: 724,
-      name_h: 50,
-      name_color: '#111111',
-      name_weight: '700',
-      name_max_size: 40,
+      name_x: 114,
+      name_y: 180,
+      name_w: 482,
+      name_h: 32,
+      name_color: '#000000',
+      name_weight: '600',
+      name_max_size: 24,
       is_official: true
     };
 

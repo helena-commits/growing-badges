@@ -21,13 +21,13 @@ export function AdminBackSection({ backTemplates, onTemplatesChange }: AdminBack
     file_url: '',
     width: 1024,
     height: 1536,
-    name_x: 160,
-    name_y: 200,
-    name_w: 704,
-    name_h: 65,
-    name_color: '#111111',
-    name_weight: '700',
-    name_max_size: 40,
+    name_x: 114,
+    name_y: 180,
+    name_w: 482,
+    name_h: 32,
+    name_color: '#000000',
+    name_weight: '600',
+    name_max_size: 24,
     is_official: false
   });
   const [backTemplateUrl, setBackTemplateUrl] = useState<string>('');
@@ -65,13 +65,13 @@ export function AdminBackSection({ backTemplates, onTemplatesChange }: AdminBack
         file_url: '',
         width: 1024,
         height: 1536,
-        name_x: 160,
-        name_y: 200,
-        name_w: 704,
-        name_h: 65,
-        name_color: '#111111',
-        name_weight: '700',
-        name_max_size: 40,
+        name_x: 114,
+        name_y: 180,
+        name_w: 482,
+        name_h: 32,
+        name_color: '#000000',
+        name_weight: '600',
+        name_max_size: 24,
         is_official: false
       });
       setBackTemplateUrl('');
