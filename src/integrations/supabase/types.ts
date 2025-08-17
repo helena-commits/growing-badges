@@ -144,7 +144,21 @@ export type Database = {
       }
       templates_back: {
         Row: {
+          admission_color: string
+          admission_h: number
+          admission_max_size: number
+          admission_w: number
+          admission_weight: string
+          admission_x: number
+          admission_y: number
           created_at: string
+          doc_num_color: string
+          doc_num_h: number
+          doc_num_max_size: number
+          doc_num_w: number
+          doc_num_weight: string
+          doc_num_x: number
+          doc_num_y: number
           file_url: string
           height: number
           id: string
@@ -160,7 +174,21 @@ export type Database = {
           width: number
         }
         Insert: {
+          admission_color?: string
+          admission_h?: number
+          admission_max_size?: number
+          admission_w?: number
+          admission_weight?: string
+          admission_x?: number
+          admission_y?: number
           created_at?: string
+          doc_num_color?: string
+          doc_num_h?: number
+          doc_num_max_size?: number
+          doc_num_w?: number
+          doc_num_weight?: string
+          doc_num_x?: number
+          doc_num_y?: number
           file_url: string
           height?: number
           id?: string
@@ -176,7 +204,21 @@ export type Database = {
           width?: number
         }
         Update: {
+          admission_color?: string
+          admission_h?: number
+          admission_max_size?: number
+          admission_w?: number
+          admission_weight?: string
+          admission_x?: number
+          admission_y?: number
           created_at?: string
+          doc_num_color?: string
+          doc_num_h?: number
+          doc_num_max_size?: number
+          doc_num_w?: number
+          doc_num_weight?: string
+          doc_num_x?: number
+          doc_num_y?: number
           file_url?: string
           height?: number
           id?: string

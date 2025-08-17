@@ -62,6 +62,43 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
           );
         }
 
+        // Draw document number (fixed text)
+        const docNumBox = {
+          x: template.doc_num_x,
+          y: template.doc_num_y,
+          w: template.doc_num_w,
+          h: template.doc_num_h
+        };
+
+        drawTextFit(
+          ctx,
+          '***.***.123-45',
+          docNumBox,
+          template.doc_num_max_size,
+          12,
+          template.doc_num_weight,
+          template.doc_num_color
+        );
+
+        // Draw admission date (current date)
+        const dateStr = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+        const admissionBox = {
+          x: template.admission_x,
+          y: template.admission_y,
+          w: template.admission_w,
+          h: template.admission_h
+        };
+
+        drawTextFit(
+          ctx,
+          dateStr,
+          admissionBox,
+          template.admission_max_size,
+          12,
+          template.admission_weight,
+          template.admission_color
+        );
+
         onRender?.();
       } catch (err) {
         console.error('Error rendering back badge:', err);

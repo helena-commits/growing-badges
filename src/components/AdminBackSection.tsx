@@ -28,6 +28,20 @@ export function AdminBackSection({ backTemplates, onTemplatesChange }: AdminBack
     name_color: '#000000',
     name_weight: '600',
     name_max_size: 20,
+    doc_num_x: 264,
+    doc_num_y: 302,
+    doc_num_w: 300,
+    doc_num_h: 28,
+    doc_num_color: '#000000',
+    doc_num_weight: '600',
+    doc_num_max_size: 20,
+    admission_x: 564,
+    admission_y: 302,
+    admission_w: 300,
+    admission_h: 28,
+    admission_color: '#000000',
+    admission_weight: '600',
+    admission_max_size: 20,
     is_official: false
   });
   const [backTemplateUrl, setBackTemplateUrl] = useState<string>('');
@@ -72,6 +86,20 @@ export function AdminBackSection({ backTemplates, onTemplatesChange }: AdminBack
         name_color: '#000000',
         name_weight: '600',
         name_max_size: 20,
+        doc_num_x: 264,
+        doc_num_y: 302,
+        doc_num_w: 300,
+        doc_num_h: 28,
+        doc_num_color: '#000000',
+        doc_num_weight: '600',
+        doc_num_max_size: 20,
+        admission_x: 564,
+        admission_y: 302,
+        admission_w: 300,
+        admission_h: 28,
+        admission_color: '#000000',
+        admission_weight: '600',
+        admission_max_size: 20,
         is_official: false
       });
       setBackTemplateUrl('');
@@ -187,6 +215,116 @@ export function AdminBackSection({ backTemplates, onTemplatesChange }: AdminBack
                     type="number"
                     value={currentBackTemplate.name_max_size || 40}
                     onChange={(e) => handleBackInputChange('name_max_size', e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Document Number Layout Configuration */}
+            <div className="space-y-4">
+              <h3 className="font-semibold">Configuração da Área do Nº do Documento</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>X</Label>
+                  <Input
+                    type="number"
+                    value={currentBackTemplate.doc_num_x || 0}
+                    onChange={(e) => handleBackInputChange('doc_num_x', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Y</Label>
+                  <Input
+                    type="number"
+                    value={currentBackTemplate.doc_num_y || 0}
+                    onChange={(e) => handleBackInputChange('doc_num_y', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Largura</Label>
+                  <Input
+                    type="number"
+                    value={currentBackTemplate.doc_num_w || 0}
+                    onChange={(e) => handleBackInputChange('doc_num_w', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Altura</Label>
+                  <Input
+                    type="number"
+                    value={currentBackTemplate.doc_num_h || 0}
+                    onChange={(e) => handleBackInputChange('doc_num_h', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Cor</Label>
+                  <Input
+                    type="color"
+                    value={currentBackTemplate.doc_num_color || '#111111'}
+                    onChange={(e) => handleBackInputChange('doc_num_color', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Tamanho Máximo</Label>
+                  <Input
+                    type="number"
+                    value={currentBackTemplate.doc_num_max_size || 20}
+                    onChange={(e) => handleBackInputChange('doc_num_max_size', e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Admission Date Layout Configuration */}
+            <div className="space-y-4">
+              <h3 className="font-semibold">Configuração da Área de Admissão</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>X</Label>
+                  <Input
+                    type="number"
+                    value={currentBackTemplate.admission_x || 0}
+                    onChange={(e) => handleBackInputChange('admission_x', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Y</Label>
+                  <Input
+                    type="number"
+                    value={currentBackTemplate.admission_y || 0}
+                    onChange={(e) => handleBackInputChange('admission_y', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Largura</Label>
+                  <Input
+                    type="number"
+                    value={currentBackTemplate.admission_w || 0}
+                    onChange={(e) => handleBackInputChange('admission_w', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Altura</Label>
+                  <Input
+                    type="number"
+                    value={currentBackTemplate.admission_h || 0}
+                    onChange={(e) => handleBackInputChange('admission_h', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Cor</Label>
+                  <Input
+                    type="color"
+                    value={currentBackTemplate.admission_color || '#111111'}
+                    onChange={(e) => handleBackInputChange('admission_color', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Tamanho Máximo</Label>
+                  <Input
+                    type="number"
+                    value={currentBackTemplate.admission_max_size || 20}
+                    onChange={(e) => handleBackInputChange('admission_max_size', e.target.value)}
                   />
                 </div>
               </div>

@@ -14,6 +14,20 @@ export interface TemplateBack {
   name_color: string;
   name_weight: string;
   name_max_size: number;
+  doc_num_x: number;
+  doc_num_y: number;
+  doc_num_w: number;
+  doc_num_h: number;
+  doc_num_color: string;
+  doc_num_weight: string;
+  doc_num_max_size: number;
+  admission_x: number;
+  admission_y: number;
+  admission_w: number;
+  admission_h: number;
+  admission_color: string;
+  admission_weight: string;
+  admission_max_size: number;
   is_official: boolean;
   created_at: string;
 }
@@ -116,6 +130,20 @@ export async function initializeDefaultBackTemplate(): Promise<void> {
       name_color: '#000000',
       name_weight: '600',
       name_max_size: 20,
+      doc_num_x: 264,
+      doc_num_y: 302,
+      doc_num_w: 300,
+      doc_num_h: 28,
+      doc_num_color: '#000000',
+      doc_num_weight: '600',
+      doc_num_max_size: 20,
+      admission_x: 564,
+      admission_y: 302,
+      admission_w: 300,
+      admission_h: 28,
+      admission_color: '#000000',
+      admission_weight: '600',
+      admission_max_size: 20,
       is_official: true
     };
 
