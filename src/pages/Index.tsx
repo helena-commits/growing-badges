@@ -132,8 +132,8 @@ const Index = () => {
               Gerador de Crachá
             </h1>
             <img 
-              src={logoImage} 
-              alt="Logo" 
+              src="/lovable-uploads/f6131db8-ea96-46b7-8fbf-bfa5fa97ded6.png" 
+              alt="Bernhoeft Logo" 
               className="h-12 md:h-16 w-auto"
             />
           </div>
