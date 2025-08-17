@@ -87,31 +87,35 @@ export function drawTextFit(
 ) {
   ctx.fillStyle = color;
   ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
+  // Use alphabetic baseline and compute precise vertical centering
+  ctx.textBaseline = 'alphabetic';
   
   let fontSize = maxSize;
-  
-  // Find the largest font size that fits
-  while (fontSize >= minSize) {
+
+  const measure = () => {
     ctx.font = `${weight} ${fontSize}px Arial, sans-serif`;
     const metrics = ctx.measureText(text);
+    const ascent = metrics.actualBoundingBoxAscent ?? fontSize * 0.8;
+    const descent = metrics.actualBoundingBoxDescent ?? fontSize * 0.2;
     const textWidth = metrics.width;
-    const textHeight = fontSize * 1.2; // Approximate line height
-    
-    if (textWidth <= box.w && textHeight <= box.h) {
-      break;
-    }
-    
+    const textHeight = ascent + descent;
+    return { ascent, descent, textWidth, textHeight };
+  };
+  
+  // Find the largest font size that fits using real font metrics
+  let m = measure();
+  while (fontSize >= minSize && (m.textWidth > box.w || m.textHeight > box.h)) {
     fontSize -= 2;
+    m = measure();
   }
   
   ctx.font = `${weight} ${fontSize}px Arial, sans-serif`;
   
-  // Draw the text centered in the box
+  // Draw the text centered in the box using ascent/descent for exact vertical centering
   const centerX = box.x + box.w / 2;
-  const centerY = box.y + box.h / 2;
+  const drawY = box.y + (box.h - (m.ascent + m.descent)) / 2 + m.ascent;
   
-  ctx.fillText(text, centerX, centerY);
+  ctx.fillText(text, centerX, Math.round(drawY));
 }
 
 // Correct image orientation based on EXIF data
