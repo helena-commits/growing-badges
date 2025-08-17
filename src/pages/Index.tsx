@@ -129,7 +129,7 @@ const Index = () => {
           <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
             Gerador de Crachá
           </h1>
-          <div className="text-2xl font-semibold text-primary">We Grow</div>
+          <div className="text-2xl font-semibold text-primary">Bernhoeft GRT</div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Faça upload da sua foto, preencha seus dados e baixe seu crachá personalizado com nossa tecnologia avançada
           </p>

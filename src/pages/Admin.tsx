@@ -156,7 +156,7 @@ export default function Admin() {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
             Administração
           </h1>
-          <div className="text-xl font-semibold text-primary">Templates de Crachá - We Grow</div>
+          <div className="text-xl font-semibold text-primary">Templates de Crachá - Bernhoeft GRT</div>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Gerencie e configure os templates oficiais para geração de crachás
           </p>
