@@ -143,7 +143,7 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         <canvas
           ref={canvasRef}
           className="max-w-full h-auto border border-gray-200 rounded-lg shadow-lg"
-          style={{ aspectRatio: '1024/1536' }}
+          style={{ aspectRatio: '1013/638' }}
         />
         
         {isRendering && (

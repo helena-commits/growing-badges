@@ -121,8 +121,8 @@ export async function initializeDefaultBackTemplate(): Promise<void> {
     const defaultTemplate = {
       name: 'Template Padrão do Verso',
       file_url: '/assets/badge-back-template.png',
-      width: 1024,
-      height: 1536,
+      width: 1013,
+      height: 638,
       name_x: 264,
       name_y: 244,
       name_w: 460,

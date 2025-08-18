@@ -19,8 +19,8 @@ export function AdminBackSection({ backTemplates, onTemplatesChange }: AdminBack
   const [currentBackTemplate, setCurrentBackTemplate] = useState<Partial<TemplateBack>>({
     name: '',
     file_url: '',
-    width: 1024,
-    height: 1536,
+    width: 1013,
+    height: 638,
     name_x: 264,
     name_y: 244,
     name_w: 460,
@@ -77,8 +77,8 @@ export function AdminBackSection({ backTemplates, onTemplatesChange }: AdminBack
       setCurrentBackTemplate({
         name: '',
         file_url: '',
-        width: 1024,
-        height: 1536,
+        width: 1013,
+        height: 638,
         name_x: 264,
         name_y: 244,
         name_w: 460,
@@ -161,7 +161,7 @@ export function AdminBackSection({ backTemplates, onTemplatesChange }: AdminBack
               bucket="templates_back"
               accept="image/png,image/jpeg"
               onUpload={handleBackTemplateUpload}
-              label="Upload do Template do Verso (1024x1536)"
+              label="Upload do Template do Verso (1013x638)"
               preview
             />
 

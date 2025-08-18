@@ -27,8 +27,8 @@ import { toast } from 'sonner';
 import { Trash2, Star, Upload } from 'lucide-react';
 
 const DEFAULT_LAYOUT = {
-  width: 1024,
-  height: 1536,
+  width: 1013,
+  height: 638,
   photo_x: 341,
   photo_y: 441,
   photo_w: 341,
@@ -57,8 +57,8 @@ export default function Admin() {
   const [currentBackTemplate, setCurrentBackTemplate] = useState<Partial<TemplateBack>>({
     name: '',
     file_url: '',
-    width: 1024,
-    height: 1536,
+    width: 1013,
+    height: 638,
     name_x: 160,
     name_y: 200,
     name_w: 704,
@@ -216,7 +216,7 @@ export default function Admin() {
                   bucket="templates"
                   accept="image/png,image/jpeg"
                   onUpload={handleTemplateUpload}
-                  label="Upload do Template (1024x1536)"
+                  label="Upload do Template (1013x638)"
                   preview
                 />
               </div>
