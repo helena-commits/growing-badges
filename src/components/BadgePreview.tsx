@@ -55,9 +55,9 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         throw new Error('Could not get canvas context');
       }
 
-      // Set canvas size
-      canvas.width = template.width;
-      canvas.height = template.height;
+      // Set canvas size to fixed print dimensions (3.375" x 2.125" at 300 DPI)
+      canvas.width = 1013;
+      canvas.height = 638;
 
       // Clear canvas
       ctx.fillStyle = '#ffffff';
@@ -67,7 +67,7 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
       if (template.file_url !== 'default-template') {
         try {
           const templateImg = await loadImage(template.file_url);
-          ctx.drawImage(templateImg, 0, 0, template.width, template.height);
+          ctx.drawImage(templateImg, 0, 0, 1013, 638);
         } catch (error) {
           console.warn('Could not load template image, using white background');
         }

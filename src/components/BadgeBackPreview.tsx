@@ -31,16 +31,16 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        // Set canvas dimensions
-        canvas.width = template.width;
-        canvas.height = template.height;
+        // Set canvas dimensions to fixed print dimensions (3.375" x 2.125" at 300 DPI)
+        canvas.width = 1013;
+        canvas.height = 638;
 
         // Clear canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Load and draw template background
         const templateImg = await loadImage(template.file_url);
-        ctx.drawImage(templateImg, 0, 0, template.width, template.height);
+        ctx.drawImage(templateImg, 0, 0, 1013, 638);
 
         // Draw name text if provided
         if (name && name.trim()) {
