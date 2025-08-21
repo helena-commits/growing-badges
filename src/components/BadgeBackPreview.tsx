@@ -31,16 +31,16 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        // Set canvas dimensions to fixed print dimensions (3.375" x 2.125" at 300 DPI)
-        canvas.width = 1013;
-        canvas.height = 638;
+        // Set canvas dimensions to fixed print dimensions (2.125" x 3.375" at 300 DPI) - Portrait orientation
+        canvas.width = 638;
+        canvas.height = 1013;
 
         // Clear canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Load and draw template background
         const templateImg = await loadImage(template.file_url);
-        ctx.drawImage(templateImg, 0, 0, 1013, 638);
+        ctx.drawImage(templateImg, 0, 0, 638, 1013);
 
         // Draw name text if provided
         if (name && name.trim()) {
@@ -143,7 +143,7 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         <canvas
           ref={canvasRef}
           className="max-w-full h-auto border border-gray-200 rounded-lg shadow-lg"
-          style={{ aspectRatio: '1013/638' }}
+          style={{ aspectRatio: '638/1013' }}
         />
         
         {isRendering && (
