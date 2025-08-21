@@ -30,24 +30,24 @@ const DEFAULT_LAYOUT = {
   width: 1013,
   height: 638,
   photo_x: 341,
-  photo_y: 441,
+  photo_y: 143,
   photo_w: 341,
   photo_h: 436,
   photo_radius: 28,
   name_x: 169,
-  name_y: 954,
+  name_y: 750,
   name_w: 688,
-  name_h: 65,
+  name_h: 82,
   role_x: 169,
-  role_y: 1137,
+  role_y: 850,
   role_w: 688,
-  role_h: 82,
+  role_h: 72,
   name_color: '#111111',
   role_color: '#111111',
   name_weight: '700',
   role_weight: '700',
-  name_max_size: 64,
-  role_max_size: 72
+  name_max_size: 90,
+  role_max_size: 80
 };
 
 export default function Admin() {
