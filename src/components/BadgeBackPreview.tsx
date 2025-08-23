@@ -55,9 +55,9 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
             ctx,
             name.trim(),
             nameBox,
-            28,
-            20,
-            '700',
+            18,
+            14,
+            '600',
             '#000000'
           );
         }
@@ -74,9 +74,9 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
           ctx,
           '***.***.123-45',
           docNumBox,
-          28,
-          20,
-          '700',
+          18,
+          14,
+          '600',
           '#000000'
         );
 
@@ -93,7 +93,7 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
           ctx,
           dateStr,
           admissionBox,
-          24,
+          18,
           14,
           '600',
           '#000000'
