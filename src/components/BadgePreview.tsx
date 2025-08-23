@@ -83,14 +83,15 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         throw new Error('No photo provided');
       }
 
+      // Draw photo - Fixed positioning and size for perfect alignment
       drawRoundedImage(
         ctx,
         photoImg,
-        template.photo_x,
-        template.photo_y,
-        template.photo_w,
-        template.photo_h,
-        template.photo_radius
+        175,  // x - centered horizontally
+        120,  // y - positioned from top
+        290,  // w - fixed width
+        340,  // h - fixed height
+        20    // radius - fixed corner radius
       );
 
       // Draw name text - Fixed positioning and size for perfect alignment
