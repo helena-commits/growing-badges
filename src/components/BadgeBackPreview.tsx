@@ -42,60 +42,60 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         const templateImg = await loadImage(template.file_url);
         ctx.drawImage(templateImg, 0, 0, 638, 1013);
 
-        // Draw name text if provided - Fixed positioning and size for perfect alignment
+        // Draw name text if provided - Aligned with label positioning
         if (name && name.trim()) {
           const nameBox = {
-            x: 70,
-            y: 168,
-            w: 460,
-            h: 72
+            x: 175,
+            y: 185,
+            w: 350,
+            h: 40
           };
 
           drawTextFit(
             ctx,
             name.trim(),
             nameBox,
-            18,
-            14,
-            '600',
+            16,
+            12,
+            '400',
             '#000000'
           );
         }
 
-        // Draw document number (fixed text) - Fixed positioning and size
+        // Draw document number (fixed text) - Aligned with label positioning
         const docNumBox = {
-          x: 70,
-          y: 240,
-          w: 260,
-          h: 60
+          x: 175,
+          y: 245,
+          w: 180,
+          h: 40
         };
 
         drawTextFit(
           ctx,
           '***.***.123-45',
           docNumBox,
-          18,
-          14,
-          '600',
+          16,
+          12,
+          '400',
           '#000000'
         );
 
-        // Draw admission date (current date) - Fixed positioning and size
+        // Draw admission date (current date) - Aligned with label positioning
         const dateStr = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
         const admissionBox = {
-          x: 370,
-          y: 240,
-          w: 160,
-          h: 50
+          x: 390,
+          y: 245,
+          w: 140,
+          h: 40
         };
 
         drawTextFit(
           ctx,
           dateStr,
           admissionBox,
-          18,
-          14,
-          '600',
+          16,
+          12,
+          '400',
           '#000000'
         );
 
