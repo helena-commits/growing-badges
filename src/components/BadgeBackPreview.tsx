@@ -64,18 +64,18 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
 
         // Draw document number (fixed text) - Fixed positioning and size
         const docNumBox = {
-          x: 55,
-          y: 220,
+          x: 70,
+          y: 240,
           w: 200,
-          h: 60
+          h: 50
         };
 
         drawTextFit(
           ctx,
           '***.***.123-45',
           docNumBox,
-          28,
-          16,
+          24,
+          14,
           '600',
           '#000000'
         );
@@ -83,18 +83,18 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         // Draw admission date (current date) - Fixed positioning and size
         const dateStr = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
         const admissionBox = {
-          x: 381,
-          y: 220,
+          x: 370,
+          y: 240,
           w: 160,
-          h: 60
+          h: 50
         };
 
         drawTextFit(
           ctx,
           dateStr,
           admissionBox,
-          28,
-          16,
+          24,
+          14,
           '600',
           '#000000'
         );
