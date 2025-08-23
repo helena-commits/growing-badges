@@ -45,18 +45,18 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         // Draw name text if provided - Fixed positioning and size for perfect alignment
         if (name && name.trim()) {
           const nameBox = {
-            x: 45,
-            y: 56,
-            w: 300,
-            h: 80
+            x: 70,
+            y: 168,
+            w: 460,
+            h: 72
           };
 
           drawTextFit(
             ctx,
             name.trim(),
             nameBox,
-            48,
-            24,
+            28,
+            20,
             '700',
             '#000000'
           );
@@ -66,17 +66,17 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         const docNumBox = {
           x: 70,
           y: 240,
-          w: 200,
-          h: 50
+          w: 260,
+          h: 60
         };
 
         drawTextFit(
           ctx,
           '***.***.123-45',
           docNumBox,
-          24,
-          14,
-          '600',
+          28,
+          20,
+          '700',
           '#000000'
         );
 
