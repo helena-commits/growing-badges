@@ -38,57 +38,66 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         // Clear canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Helper function to draw label + value on same line with same baseline
-        const drawLabelValue = (
-          label: string,
-          value: string,
-          x: number,
-          y: number,
-          maxWidth: number,
-          gap: number = 12
-        ) => {
-          // Same font family and weight as labels
-          ctx.font = '700 28px Arial';
-          ctx.textBaseline = 'alphabetic';
-          ctx.fillStyle = '#000';
-
-          // Measure label width to position value
-          const labelWidth = ctx.measureText(label).width;
-
-          // Draw label
-          ctx.fillText(label, x, y);
-
-          // Draw value right after label with same baseline
-          const valueX = x + labelWidth + gap;
-          const availableWidth = maxWidth - labelWidth - gap;
-          
-          // Use drawTextFit for value with same font settings
-          drawTextFit(
-            ctx,
-            value,
-            { x: valueX, y: y - 20, w: availableWidth, h: 40 },
-            28,
-            18,
-            '700',
-            '#000000'
-          );
-        };
-
         // Load and draw template background
         const templateImg = await loadImage(template.file_url);
         ctx.drawImage(templateImg, 0, 0, 638, 1013);
 
-        // Draw name with label on same line
+        // Draw name text if provided - Aligned with label positioning
         if (name && name.trim()) {
-          drawLabelValue('NOME COMPLETO:', name.trim(), 70, 200, 500);
+          const nameBox = {
+            x: 175,
+            y: 185,
+            w: 350,
+            h: 40
+          };
+
+          drawTextFit(
+            ctx,
+            name.trim(),
+            nameBox,
+            16,
+            12,
+            '400',
+            '#000000'
+          );
         }
 
-        // Draw document number with label on same line
-        drawLabelValue('Nº DO DOCUMENTO:', '***.***.123-45', 70, 260, 350);
+        // Draw document number (fixed text) - Aligned with label positioning
+        const docNumBox = {
+          x: 175,
+          y: 245,
+          w: 180,
+          h: 40
+        };
 
-        // Draw admission date with label on same line
+        drawTextFit(
+          ctx,
+          '***.***.123-45',
+          docNumBox,
+          16,
+          12,
+          '400',
+          '#000000'
+        );
+
+        // Draw admission date (current date) - Aligned with label positioning
         const dateStr = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
-        drawLabelValue('ADMISSÃO:', dateStr, 70, 320, 300);
+        const admissionBox = {
+          x: 390,
+          y: 245,
+          w: 140,
+          h: 40
+        };
+
+        drawTextFit(
+          ctx,
+          dateStr,
+          admissionBox,
+          16,
+          12,
+          '400',
+          '#000000'
+        );
 
         onRender?.();
       } catch (err) {
