@@ -87,31 +87,39 @@ export function drawTextFit(
 ) {
   ctx.fillStyle = color;
   ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
+  ctx.textBaseline = 'alphabetic';
   
   let fontSize = maxSize;
   
-  // Find the largest font size that fits
+  // Find the largest font size that fits within the box
   while (fontSize >= minSize) {
     ctx.font = `${weight} ${fontSize}px Arial, sans-serif`;
     const metrics = ctx.measureText(text);
     const textWidth = metrics.width;
-    const textHeight = fontSize * 1.2; // Approximate line height
     
-    if (textWidth <= box.w && textHeight <= box.h) {
+    // Use more accurate text height calculation
+    const actualHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
+    const textHeight = actualHeight || fontSize;
+    
+    if (textWidth <= box.w * 0.95 && textHeight <= box.h * 0.9) {
       break;
     }
     
-    fontSize -= 2;
+    fontSize -= 1;
   }
   
   ctx.font = `${weight} ${fontSize}px Arial, sans-serif`;
   
-  // Draw the text centered in the box
+  // Calculate precise positioning for better alignment
   const centerX = box.x + box.w / 2;
-  const centerY = box.y + box.h / 2;
+  const metrics = ctx.measureText(text);
+  const textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
+  const actualTextHeight = textHeight || fontSize;
   
-  ctx.fillText(text, centerX, centerY);
+  // Position text in the vertical center of the box
+  const baselineY = box.y + (box.h / 2) + (actualTextHeight / 2) - metrics.actualBoundingBoxDescent;
+  
+  ctx.fillText(text, centerX, baselineY);
 }
 
 // Correct image orientation based on EXIF data
