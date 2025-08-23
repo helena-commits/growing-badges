@@ -42,60 +42,60 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         const templateImg = await loadImage(template.file_url);
         ctx.drawImage(templateImg, 0, 0, 638, 1013);
 
-        // Draw name text if provided - Aligned with label positioning
+        // Draw name text if provided - Fixed positioning and size for perfect alignment
         if (name && name.trim()) {
           const nameBox = {
-            x: 175,
-            y: 185,
-            w: 350,
-            h: 40
+            x: 45,
+            y: 56,
+            w: 300,
+            h: 80
           };
 
           drawTextFit(
             ctx,
             name.trim(),
             nameBox,
-            16,
-            12,
-            '400',
+            48,
+            24,
+            '700',
             '#000000'
           );
         }
 
-        // Draw document number (fixed text) - Aligned with label positioning
+        // Draw document number (fixed text) - Fixed positioning and size
         const docNumBox = {
-          x: 175,
-          y: 245,
-          w: 180,
-          h: 40
+          x: 55,
+          y: 220,
+          w: 200,
+          h: 60
         };
 
         drawTextFit(
           ctx,
           '***.***.123-45',
           docNumBox,
+          28,
           16,
-          12,
-          '400',
+          '600',
           '#000000'
         );
 
-        // Draw admission date (current date) - Aligned with label positioning
+        // Draw admission date (current date) - Fixed positioning and size
         const dateStr = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
         const admissionBox = {
-          x: 390,
-          y: 245,
-          w: 140,
-          h: 40
+          x: 381,
+          y: 220,
+          w: 160,
+          h: 60
         };
 
         drawTextFit(
           ctx,
           dateStr,
           admissionBox,
+          28,
           16,
-          12,
-          '400',
+          '600',
           '#000000'
         );
 
