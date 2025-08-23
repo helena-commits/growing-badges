@@ -42,61 +42,61 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         const templateImg = await loadImage(template.file_url);
         ctx.drawImage(templateImg, 0, 0, 638, 1013);
 
-        // Draw name text if provided - Fixed positioning and size for perfect alignment
+        // Draw name text if provided - Use template configuration
         if (name && name.trim()) {
           const nameBox = {
-            x: 45,
-            y: 56,
-            w: 300,
-            h: 80
+            x: template.name_x || 45,
+            y: template.name_y || 56,
+            w: template.name_w || 300,
+            h: template.name_h || 80
           };
 
           drawTextFit(
             ctx,
             name.trim(),
             nameBox,
-            48,
-            24,
-            '700',
-            '#000000'
+            template.name_max_size || 48,
+            14,
+            template.name_weight || '700',
+            template.name_color || '#000000'
           );
         }
 
-        // Draw document number (fixed text) - Fixed positioning and size
+        // Draw document number (fixed text) - Use template configuration
         const docNumBox = {
-          x: 55,
-          y: 220,
-          w: 200,
-          h: 60
+          x: template.doc_num_x || 55,
+          y: template.doc_num_y || 220,
+          w: template.doc_num_w || 200,
+          h: template.doc_num_h || 60
         };
 
         drawTextFit(
           ctx,
           '***.***.123-45',
           docNumBox,
-          28,
-          16,
-          '600',
-          '#000000'
+          template.doc_num_max_size || 28,
+          14,
+          template.doc_num_weight || '600',
+          template.doc_num_color || '#000000'
         );
 
-        // Draw admission date (current date) - Fixed positioning and size
+        // Draw admission date (current date) - Use template configuration
         const dateStr = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
         const admissionBox = {
-          x: 381,
-          y: 220,
-          w: 160,
-          h: 60
+          x: template.admission_x || 381,
+          y: template.admission_y || 220,
+          w: template.admission_w || 160,
+          h: template.admission_h || 60
         };
 
         drawTextFit(
           ctx,
           dateStr,
           admissionBox,
-          28,
-          16,
-          '600',
-          '#000000'
+          template.admission_max_size || 28,
+          14,
+          template.admission_weight || '600',
+          template.admission_color || '#000000'
         );
 
         onRender?.();
