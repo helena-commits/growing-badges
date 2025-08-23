@@ -12,8 +12,9 @@ import { getOfficialTemplate, saveBadge, uploadFile, Template } from '@/lib/supa
 import { getOfficialBackTemplate, initializeDefaultBackTemplate, TemplateBack } from '@/lib/supabase-back';
 import { createSlug } from '@/lib/canvas-utils';
 import { toast } from 'sonner';
-import { Download, Eye, AlertTriangle, Settings } from 'lucide-react';
+import { Download, Eye, AlertTriangle, Settings, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import jsPDF from 'jspdf';
 
 const Index = () => {
   const [template, setTemplate] = useState<Template | null>(null);
@@ -191,6 +192,53 @@ const Index = () => {
     }
   };
 
+  const handleDownloadPDF = async () => {
+    if (!badgePreviewRef.current) {
+      toast.error('Erro ao gerar PDF: pré-visualização não encontrada');
+      return;
+    }
+    
+    setLoading(true);
+    try {
+      // Get PNG data from both preview components
+      const frontDataUrl = badgePreviewRef.current.toPNG();
+      if (!frontDataUrl) {
+        toast.error('Erro ao gerar imagem da frente');
+        return;
+      }
+
+      // Create PDF with portrait orientation and standard badge dimensions
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: [54, 85.6] // Standard badge size: 54mm x 85.6mm
+      });
+
+      // Add front page
+      pdf.addImage(frontDataUrl, 'PNG', 0, 0, 54, 85.6);
+
+      // Add back page if available
+      if (canDownloadBack && badgeBackPreviewRef.current && backTemplate) {
+        const backDataUrl = badgeBackPreviewRef.current.toPNG();
+        if (backDataUrl) {
+          pdf.addPage();
+          pdf.addImage(backDataUrl, 'PNG', 0, 0, 54, 85.6);
+        }
+      }
+
+      // Save the PDF
+      const fileName = `cracha-${createSlug(name)}.pdf`;
+      pdf.save(fileName);
+
+      toast.success('PDF gerado com sucesso!');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      toast.error('Erro ao gerar PDF');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const isFormValid = photoFile && name.trim() && role.trim();
 
   return (
@@ -332,11 +380,22 @@ const Index = () => {
                 <Button 
                   onClick={handleDownloadBoth} 
                   disabled={!canDownload || loading} 
+                  variant="outline"
                   size="lg" 
                   className="w-full"
                 >
                   <Download className="w-4 h-4 mr-2" />
-                  {loading ? 'Baixando...' : 'Baixar Frente e Verso'}
+                  {loading ? 'Baixando...' : 'Baixar PNGs Separados'}
+                </Button>
+
+                <Button 
+                  onClick={handleDownloadPDF} 
+                  disabled={!canDownload || loading} 
+                  size="lg" 
+                  className="w-full"
+                >
+                  <FileText className="w-4 h-4 mr-2" />
+                  {loading ? 'Gerando...' : 'Baixar PDF (Frente e Verso)'}
                 </Button>
               </div>
             </CardContent>
