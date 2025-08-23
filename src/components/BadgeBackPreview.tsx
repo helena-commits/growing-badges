@@ -42,61 +42,61 @@ export const BadgeBackPreview = forwardRef<BadgeBackPreviewRef, BadgeBackPreview
         const templateImg = await loadImage(template.file_url);
         ctx.drawImage(templateImg, 0, 0, 638, 1013);
 
-        // Draw name text if provided
+        // Draw name text if provided - Fixed positioning and size for perfect alignment
         if (name && name.trim()) {
           const nameBox = {
-            x: template.name_x,
-            y: template.name_y,
-            w: template.name_w,
-            h: template.name_h
+            x: 45,
+            y: 56,
+            w: 300,
+            h: 80
           };
 
           drawTextFit(
             ctx,
             name.trim(),
             nameBox,
-            template.name_max_size,
+            48,
             24,
-            template.name_weight,
-            template.name_color
+            '700',
+            '#000000'
           );
         }
 
-        // Draw document number (fixed text)
+        // Draw document number (fixed text) - Fixed positioning and size
         const docNumBox = {
-          x: template.doc_num_x,
-          y: template.doc_num_y,
-          w: template.doc_num_w,
-          h: template.doc_num_h
+          x: 55,
+          y: 220,
+          w: 200,
+          h: 60
         };
 
         drawTextFit(
           ctx,
           '***.***.123-45',
           docNumBox,
-          template.doc_num_max_size,
-          12,
-          template.doc_num_weight,
-          template.doc_num_color
+          28,
+          16,
+          '600',
+          '#000000'
         );
 
-        // Draw admission date (current date)
+        // Draw admission date (current date) - Fixed positioning and size
         const dateStr = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
         const admissionBox = {
-          x: template.admission_x,
-          y: template.admission_y,
-          w: template.admission_w,
-          h: template.admission_h
+          x: 381,
+          y: 220,
+          w: 160,
+          h: 60
         };
 
         drawTextFit(
           ctx,
           dateStr,
           admissionBox,
-          template.admission_max_size,
-          12,
-          template.admission_weight,
-          template.admission_color
+          28,
+          16,
+          '600',
+          '#000000'
         );
 
         onRender?.();

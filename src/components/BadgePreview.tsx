@@ -93,36 +93,36 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         template.photo_radius
       );
 
-      // Draw name text
+      // Draw name text - Fixed positioning and size for perfect alignment
       drawTextFit(
         ctx,
         name,
         {
-          x: template.name_x,
-          y: template.name_y,
-          w: template.name_w,
-          h: template.name_h
+          x: 120,
+          y: 480,
+          w: 400,
+          h: 80
         },
-        template.name_max_size,
+        48,
         24,
-        template.name_weight,
-        template.name_color
+        '700',
+        '#111111'
       );
 
-      // Draw role text
+      // Draw role text - Fixed positioning and size for perfect alignment  
       drawTextFit(
         ctx,
         role,
         {
-          x: template.role_x,
-          y: template.role_y,
-          w: template.role_w,
-          h: template.role_h
+          x: 170,
+          y: 540,
+          w: 300,
+          h: 60
         },
-        template.role_max_size,
-        24,
-        template.role_weight,
-        template.role_color
+        36,
+        18,
+        '600',
+        '#111111'
       );
 
       onRender?.(true);
