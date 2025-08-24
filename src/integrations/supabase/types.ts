@@ -55,6 +55,36 @@ export type Database = {
           },
         ]
       }
+      badges_printed: {
+        Row: {
+          action: string
+          full_name: string
+          id: string
+          photo_origin: string | null
+          photo_url: string | null
+          printed_at: string
+          role_title: string
+        }
+        Insert: {
+          action: string
+          full_name: string
+          id?: string
+          photo_origin?: string | null
+          photo_url?: string | null
+          printed_at?: string
+          role_title: string
+        }
+        Update: {
+          action?: string
+          full_name?: string
+          id?: string
+          photo_origin?: string | null
+          photo_url?: string | null
+          printed_at?: string
+          role_title?: string
+        }
+        Relationships: []
+      }
       templates: {
         Row: {
           created_at: string

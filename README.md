@@ -71,3 +71,36 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+## Histórico de Crachás Emitidos
+
+Este projeto agora registra automaticamente todas as emissões de crachás (downloads e impressões) em um banco de dados Supabase para fins de auditoria e relatórios.
+
+### Configuração da Base de Dados
+
+A estrutura necessária está documentada em `docs/sql/badges_printed.sql`. Se você estiver configurando um novo projeto, execute esse SQL no Supabase SQL Editor.
+
+### Página Administrativa de Relatórios
+
+Acesse `/admin/prints` para visualizar:
+- KPIs (total emitidos, emitidos hoje, últimos 7 dias)
+- Lista filtrável com busca por nome e intervalo de datas
+- Export CSV dos resultados
+- Atualização automática a cada 5 segundos
+
+### Configuração de Senha Administrativa
+
+Para proteger a página de relatórios, defina a variável de ambiente:
+```
+VITE_ADMIN_PASSWORD=sua_senha_aqui
+```
+
+Se não definida, a senha padrão será `admin123`.
+
+### Funcionalidades Implementadas
+
+- **Registro automático**: Cada download/impressão é registrado sem interromper o fluxo normal
+- **Detecção de origem da foto**: Identifica se a foto veio do Supabase via URL ou foi enviada localmente
+- **Proteção por senha**: Interface administrativa protegida por sessão
+- **Relatórios em tempo real**: Dados atualizados automaticamente
+- **Export de dados**: Funcionalidade completa de exportação CSV

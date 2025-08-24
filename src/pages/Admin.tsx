@@ -24,7 +24,8 @@ import {
 } from '@/lib/supabase-back';
 import { AdminBackSection } from '@/components/AdminBackSection';
 import { toast } from 'sonner';
-import { Trash2, Star, Upload } from 'lucide-react';
+import { Trash2, Star, Upload, BarChart3 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const DEFAULT_LAYOUT = {
   width: 1013,
@@ -191,6 +192,14 @@ export default function Admin() {
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Gerencie e configure os templates oficiais para geração de crachás
           </p>
+          <div className="flex justify-center">
+            <Link to="/admin/prints">
+              <Button variant="outline" size="lg">
+                <BarChart3 className="w-4 h-4 mr-2" />
+                Relatório de Crachás Emitidos
+              </Button>
+            </Link>
+          </div>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-2">

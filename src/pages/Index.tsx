@@ -11,6 +11,7 @@ import { BadgeBackPreview, BadgeBackPreviewRef } from '@/components/BadgeBackPre
 import { getOfficialTemplate, saveBadge, uploadFile, Template } from '@/lib/supabase';
 import { getOfficialBackTemplate, initializeDefaultBackTemplate, TemplateBack } from '@/lib/supabase-back';
 import { createSlug } from '@/lib/canvas-utils';
+import { logBadgePrint } from '@/lib/print-logger';
 import { toast } from 'sonner';
 import { Download, Eye, AlertTriangle, Settings, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -22,6 +23,7 @@ const Index = () => {
   const [backTemplate, setBackTemplate] = useState<TemplateBack | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [photoUrl, setPhotoUrl] = useState<string>('');
+  const [photoParamFromUrl, setPhotoParamFromUrl] = useState<string | null>(null);
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   const [saveToHistory, setSaveToHistory] = useState(false);
@@ -42,6 +44,7 @@ const Index = () => {
     const p = new URLSearchParams(location.search);
     const url = p.get('photo');
     if (!url) return;
+    setPhotoParamFromUrl(url);
     (async () => {
       try {
         const res = await fetch(url, { mode: 'cors' });
@@ -285,6 +288,15 @@ const Index = () => {
       link.click();
       URL.revokeObjectURL(url);
 
+      // Log the download action
+      await logBadgePrint({
+        fullName: name,
+        roleTitle: role,
+        action: 'download',
+        photoUrl: photoParamFromUrl ?? null,
+        photoOrigin: photoParamFromUrl ? 'supabase' : 'local'
+      });
+
       toast.success('PDF gerado com sucesso!');
     } catch (error) {
       console.error('Error generating PDF:', error);
@@ -299,6 +311,16 @@ const Index = () => {
     try {
       const pdfBlob = await generateBadgePdfBlob();
       await openAndPrintPdf(pdfBlob);
+      
+      // Log the print action
+      await logBadgePrint({
+        fullName: name,
+        roleTitle: role,
+        action: 'print',
+        photoUrl: photoParamFromUrl ?? null,
+        photoOrigin: photoParamFromUrl ? 'supabase' : 'local'
+      });
+
       toast.success('PDF enviado para impressão');
     } catch (error) {
       console.error('Error printing PDF:', error);
