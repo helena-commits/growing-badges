@@ -213,48 +213,96 @@ const Index = () => {
     }
   };
 
-  const handleDownloadPDF = async () => {
+  // Generate PDF blob for both download and print
+  const generateBadgePdfBlob = async (): Promise<Blob> => {
     if (!badgePreviewRef.current) {
-      toast.error('Erro ao gerar PDF: pré-visualização não encontrada');
+      throw new Error('Pré-visualização não encontrada');
+    }
+
+    // Get PNG data from both preview components
+    const frontDataUrl = badgePreviewRef.current.toPNG();
+    if (!frontDataUrl) {
+      throw new Error('Erro ao gerar imagem da frente');
+    }
+
+    // Create PDF with portrait orientation and standard badge dimensions
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: [54, 85.6] // Standard badge size: 54mm x 85.6mm
+    });
+
+    // Add front page
+    pdf.addImage(frontDataUrl, 'PNG', 0, 0, 54, 85.6);
+
+    // Add back page if available
+    if (canDownloadBack && badgeBackPreviewRef.current && backTemplate) {
+      const backDataUrl = badgeBackPreviewRef.current.toPNG();
+      if (backDataUrl) {
+        pdf.addPage();
+        pdf.addImage(backDataUrl, 'PNG', 0, 0, 54, 85.6);
+      }
+    }
+
+    // Return PDF as blob
+    return pdf.output('blob');
+  };
+
+  // Helper to open PDF in new tab and print
+  const openAndPrintPdf = async (pdfBlob: Blob) => {
+    const url = URL.createObjectURL(pdfBlob);
+    const win = window.open(url, '_blank');
+    if (!win) {
+      toast.error('Permita pop-ups para imprimir automaticamente');
       return;
     }
-    
+    const onLoad = () => {
+      try {
+        win.focus();
+        win.print();
+      } catch {}
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+        try {
+          win.close();
+        } catch {}
+      }, 4000);
+    };
+    win.addEventListener?.('load', onLoad);
+  };
+
+  const handleDownloadPDF = async () => {
     setLoading(true);
     try {
-      // Get PNG data from both preview components
-      const frontDataUrl = badgePreviewRef.current.toPNG();
-      if (!frontDataUrl) {
-        toast.error('Erro ao gerar imagem da frente');
-        return;
-      }
-
-      // Create PDF with portrait orientation and standard badge dimensions
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: [54, 85.6] // Standard badge size: 54mm x 85.6mm
-      });
-
-      // Add front page
-      pdf.addImage(frontDataUrl, 'PNG', 0, 0, 54, 85.6);
-
-      // Add back page if available
-      if (canDownloadBack && badgeBackPreviewRef.current && backTemplate) {
-        const backDataUrl = badgeBackPreviewRef.current.toPNG();
-        if (backDataUrl) {
-          pdf.addPage();
-          pdf.addImage(backDataUrl, 'PNG', 0, 0, 54, 85.6);
-        }
-      }
-
+      const pdfBlob = await generateBadgePdfBlob();
+      
       // Save the PDF
       const fileName = `cracha-${createSlug(name)}.pdf`;
-      pdf.save(fileName);
+      const url = URL.createObjectURL(pdfBlob);
+      const link = document.createElement('a');
+      link.download = fileName;
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(url);
 
       toast.success('PDF gerado com sucesso!');
     } catch (error) {
       console.error('Error generating PDF:', error);
       toast.error('Erro ao gerar PDF');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePrintPdf = async () => {
+    setLoading(true);
+    try {
+      const pdfBlob = await generateBadgePdfBlob();
+      await openAndPrintPdf(pdfBlob);
+      toast.success('PDF enviado para impressão');
+    } catch (error) {
+      console.error('Error printing PDF:', error);
+      toast.error('Não foi possível gerar/imprimir o PDF');
     } finally {
       setLoading(false);
     }
@@ -417,6 +465,17 @@ const Index = () => {
                 >
                   <FileText className="w-4 h-4 mr-2" />
                   {loading ? 'Gerando...' : 'Baixar PDF (Frente e Verso)'}
+                </Button>
+
+                <Button 
+                  onClick={handlePrintPdf} 
+                  disabled={!canDownload || loading} 
+                  variant="outline"
+                  size="lg" 
+                  className="w-full"
+                >
+                  <FileText className="w-4 h-4 mr-2" />
+                  {loading ? 'Gerando...' : 'Imprimir (Evolis)'}
                 </Button>
               </div>
             </CardContent>
