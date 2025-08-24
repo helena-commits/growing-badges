@@ -13,10 +13,11 @@ import { getOfficialBackTemplate, initializeDefaultBackTemplate, TemplateBack } 
 import { createSlug } from '@/lib/canvas-utils';
 import { toast } from 'sonner';
 import { Download, Eye, AlertTriangle, Settings, FileText } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import jsPDF from 'jspdf';
 
 const Index = () => {
+  const location = useLocation();
   const [template, setTemplate] = useState<Template | null>(null);
   const [backTemplate, setBackTemplate] = useState<TemplateBack | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
@@ -35,6 +36,26 @@ const Index = () => {
   useEffect(() => {
     loadOfficialTemplates();
   }, []);
+
+  // Load photo from URL parameter
+  useEffect(() => {
+    const p = new URLSearchParams(location.search);
+    const url = p.get('photo');
+    if (!url) return;
+    (async () => {
+      try {
+        const res = await fetch(url, { mode: 'cors' });
+        const blob = await res.blob();
+        const ext = (blob.type.split('/')[1] || 'jpg').split(';')[0];
+        const objectUrl = URL.createObjectURL(blob);
+        setPhotoUrl(objectUrl);
+        setPhotoFile(new File([blob], `from-supabase.${ext}`, { type: blob.type }));
+        toast.success('Foto carregada automaticamente do Supabase');
+      } catch (e) {
+        toast.error('Não foi possível carregar a foto automaticamente');
+      }
+    })();
+  }, [location.search]);
 
   const loadOfficialTemplates = async () => {
     // Initialize default back template if needed
