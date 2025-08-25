@@ -7,8 +7,6 @@ import {
   correctImageOrientation,
   createSlug 
 } from '@/lib/canvas-utils';
-import QRCode from 'qrcode';
-import { QR_TARGET_URL } from '@/lib/qr-config';
 
 interface BadgePreviewProps {
   template: Template | null;
@@ -127,26 +125,6 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         '600',
         '#111111'
       );
-
-      // Generate and draw QR code - Centered on the badge
-      try {
-        const qrDataUrl = await QRCode.toDataURL(QR_TARGET_URL, {
-          width: 180,
-          margin: 1,
-          color: {
-            dark: '#000000',
-            light: '#FFFFFF'
-          }
-        });
-        const qrImg = await loadImage(qrDataUrl);
-        // Center the QR code horizontally and position it in the lower area
-        const qrSize = 180;
-        const centerX = (canvas.width - qrSize) / 2;
-        const qrY = 780; // Position in lower area of badge
-        ctx.drawImage(qrImg, centerX, qrY, qrSize, qrSize);
-      } catch (qrError) {
-        console.warn('Could not generate QR code:', qrError);
-      }
 
       onRender?.(true);
     } catch (error) {

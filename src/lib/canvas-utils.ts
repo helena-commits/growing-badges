@@ -1,6 +1,4 @@
 import * as exifr from 'exifr';
-import QRCode from 'qrcode';
-import { QR_TARGET_URL } from './qr-config';
 
 // Load image from File or URL
 export async function loadImage(src: File | string): Promise<HTMLImageElement> {
@@ -200,21 +198,4 @@ export function createSlug(text: string): string {
     .replace(/-+/g, '-') // Replace multiple hyphens with single
     .trim()
     .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
-}
-
-// Generate QR code for PDF
-export async function generateQRForPDF(): Promise<string> {
-  try {
-    return await QRCode.toDataURL(QR_TARGET_URL, {
-      width: 120,
-      margin: 1,
-      color: {
-        dark: '#000000',
-        light: '#FFFFFF'
-      }
-    });
-  } catch (error) {
-    console.warn('Could not generate QR code for PDF:', error);
-    return '';
-  }
 }
