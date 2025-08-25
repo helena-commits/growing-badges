@@ -39,25 +39,40 @@ const Index = () => {
     loadOfficialTemplates();
   }, []);
 
-  // Load photo from URL parameter
+  // Load photo, name and role from URL parameters
   useEffect(() => {
     const p = new URLSearchParams(location.search);
+    
+    // Load photo
     const url = p.get('photo');
-    if (!url) return;
-    setPhotoParamFromUrl(url);
-    (async () => {
-      try {
-        const res = await fetch(url, { mode: 'cors' });
-        const blob = await res.blob();
-        const ext = (blob.type.split('/')[1] || 'jpg').split(';')[0];
-        const objectUrl = URL.createObjectURL(blob);
-        setPhotoUrl(objectUrl);
-        setPhotoFile(new File([blob], `from-supabase.${ext}`, { type: blob.type }));
-        toast.success('Foto carregada automaticamente do Supabase');
-      } catch (e) {
-        toast.error('Não foi possível carregar a foto automaticamente');
-      }
-    })();
+    if (url) {
+      setPhotoParamFromUrl(url);
+      (async () => {
+        try {
+          const res = await fetch(url, { mode: 'cors' });
+          const blob = await res.blob();
+          const ext = (blob.type.split('/')[1] || 'jpg').split(';')[0];
+          const objectUrl = URL.createObjectURL(blob);
+          setPhotoUrl(objectUrl);
+          setPhotoFile(new File([blob], `from-supabase.${ext}`, { type: blob.type }));
+          toast.success('Foto carregada automaticamente do Supabase');
+        } catch (e) {
+          toast.error('Não foi possível carregar a foto automaticamente');
+        }
+      })();
+    }
+
+    // Load name and role
+    const nameParam = p.get('name');
+    const roleParam = p.get('role');
+    
+    if (nameParam) {
+      setName(nameParam);
+    }
+    
+    if (roleParam) {
+      setRole(roleParam);
+    }
   }, [location.search]);
 
   const loadOfficialTemplates = async () => {
