@@ -60,6 +60,25 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Configuração do QR Code
+
+O QR code gerado nos crachás aponta para a imagem oficial "Não Conforme" localizada em:
+```
+public/assets/nao-conforme-oficial2.png
+```
+
+### Personalização da URL do QR
+
+Você pode personalizar a URL do QR code definindo a variável de ambiente:
+```bash
+VITE_QR_TARGET_URL=https://exemplo.com/sua-imagem-customizada.png
+```
+
+Se não definida, o QR apontará automaticamente para:
+```
+${window.location.origin}/assets/nao-conforme-oficial2.png
+```
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/c70a66f5-5dc4-48f7-abe1-845087595575) and click on Share -> Publish.

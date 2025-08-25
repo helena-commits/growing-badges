@@ -128,10 +128,10 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         '#111111'
       );
 
-      // Generate and draw QR code - Fixed positioning on the right side
+      // Generate and draw QR code - Centered on the badge
       try {
         const qrDataUrl = await QRCode.toDataURL(QR_TARGET_URL, {
-          width: 120,
+          width: 180,
           margin: 1,
           color: {
             dark: '#000000',
@@ -139,7 +139,11 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
           }
         });
         const qrImg = await loadImage(qrDataUrl);
-        ctx.drawImage(qrImg, 480, 820, 120, 120); // Bottom right position
+        // Center the QR code horizontally and position it in the lower area
+        const qrSize = 180;
+        const centerX = (canvas.width - qrSize) / 2;
+        const qrY = 780; // Position in lower area of badge
+        ctx.drawImage(qrImg, centerX, qrY, qrSize, qrSize);
       } catch (qrError) {
         console.warn('Could not generate QR code:', qrError);
       }
