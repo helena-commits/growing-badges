@@ -1,4 +1,5 @@
 import * as exifr from 'exifr';
+import * as QRCode from 'qrcode';
 
 // Load image from File or URL
 export async function loadImage(src: File | string): Promise<HTMLImageElement> {
@@ -184,6 +185,25 @@ export async function correctImageOrientation(file: File): Promise<HTMLImageElem
   } catch (error) {
     console.warn('Could not read EXIF data, using image as-is:', error);
     return loadImage(file);
+  }
+}
+
+// Generate QR code as image
+export async function generateQRCode(text: string, size: number = 200): Promise<HTMLImageElement> {
+  try {
+    const qrDataUrl = await QRCode.toDataURL(text, {
+      width: size,
+      margin: 1,
+      color: {
+        dark: '#000000',
+        light: '#FFFFFF'
+      }
+    });
+    
+    return loadImage(qrDataUrl);
+  } catch (error) {
+    console.error('Error generating QR code:', error);
+    throw new Error('Failed to generate QR code');
   }
 }
 

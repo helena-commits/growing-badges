@@ -5,7 +5,8 @@ import {
   drawRoundedImage, 
   drawTextFit, 
   correctImageOrientation,
-  createSlug 
+  createSlug,
+  generateQRCode 
 } from '@/lib/canvas-utils';
 
 interface BadgePreviewProps {
@@ -125,6 +126,23 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         '600',
         '#111111'
       );
+
+      // Generate and draw QR code pointing to the specified URL
+      try {
+        const qrCodeImg = await generateQRCode(
+          'https://rcvyzcngjxnxiyzopbqk.supabase.co/storage/v1/object/public/assets-public/nao-conforme.png',
+          120
+        );
+        
+        // Draw QR code centered at the bottom of the badge
+        const qrSize = 120;
+        const qrX = (canvas.width - qrSize) / 2; // Center horizontally
+        const qrY = 650; // Position from top
+        
+        ctx.drawImage(qrCodeImg, qrX, qrY, qrSize, qrSize);
+      } catch (error) {
+        console.warn('Could not generate QR code:', error);
+      }
 
       onRender?.(true);
     } catch (error) {
