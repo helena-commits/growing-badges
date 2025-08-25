@@ -67,6 +67,8 @@ O QR code gerado nos crachás aponta para a imagem oficial "Não Conforme" local
 public/assets/nao-conforme-oficial2.png
 ```
 
+Este arquivo deve ser servido como arquivo estático (não como módulo TypeScript) para garantir acesso público via URL.
+
 ### Personalização da URL do QR
 
 Você pode personalizar a URL do QR code definindo a variável de ambiente:
@@ -77,6 +79,11 @@ VITE_QR_TARGET_URL=https://exemplo.com/sua-imagem-customizada.png
 Se não definida, o QR apontará automaticamente para:
 ```
 ${window.location.origin}/assets/nao-conforme-oficial2.png
+```
+
+Após o deploy, a imagem deve estar acessível em:
+```
+https://growing-badges.lovable.app/assets/nao-conforme-oficial2.png
 ```
 
 ## How can I deploy this project?
