@@ -55,9 +55,35 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         throw new Error('Could not get canvas context');
       }
 
-      // Set canvas size to fixed print dimensions (2.125" x 3.375" at 300 DPI) - Portrait orientation
-      canvas.width = 638;
-      canvas.height = 1013;
+      // Define fallback values for template properties
+      const canvasWidth = template.width ?? 638;
+      const canvasHeight = template.height ?? 1013;
+
+      const photoX = template.photo_x ?? 175;
+      const photoY = template.photo_y ?? 120;
+      const photoW = template.photo_w ?? 290;
+      const photoH = template.photo_h ?? 340;
+      const photoRadius = template.photo_radius ?? 20;
+
+      const nameX = template.name_x ?? 120;
+      const nameY = template.name_y ?? 480;
+      const nameW = template.name_w ?? 400;
+      const nameH = template.name_h ?? 80;
+      const nameMaxSize = template.name_max_size ?? 48;
+      const nameWeight = template.name_weight ?? '700';
+      const nameColor = template.name_color ?? '#111111';
+
+      const roleX = template.role_x ?? 170;
+      const roleY = template.role_y ?? 540;
+      const roleW = template.role_w ?? 300;
+      const roleH = template.role_h ?? 60;
+      const roleMaxSize = template.role_max_size ?? 36;
+      const roleWeight = template.role_weight ?? '600';
+      const roleColor = template.role_color ?? '#111111';
+
+      // Set canvas size using fallback values
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
 
       // Clear canvas
       ctx.fillStyle = '#ffffff';
@@ -67,7 +93,7 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
       if (template.file_url !== 'default-template') {
         try {
           const templateImg = await loadImage(template.file_url);
-          ctx.drawImage(templateImg, 0, 0, 638, 1013);
+          ctx.drawImage(templateImg, 0, 0, canvasWidth, canvasHeight);
         } catch (error) {
           console.warn('Could not load template image, using white background');
         }
@@ -83,47 +109,47 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         throw new Error('No photo provided');
       }
 
-      // Draw photo - Fixed positioning and size for perfect alignment
+      // Draw photo using template coordinates with fallbacks
       drawRoundedImage(
         ctx,
         photoImg,
-        175,  // x - centered horizontally
-        120,  // y - positioned from top
-        290,  // w - fixed width
-        340,  // h - fixed height
-        20    // radius - fixed corner radius
+        photoX,
+        photoY,
+        photoW,
+        photoH,
+        photoRadius
       );
 
-      // Draw name text - Fixed positioning and size for perfect alignment
+      // Draw name text using template coordinates with fallbacks
       drawTextFit(
         ctx,
         name,
         {
-          x: 120,
-          y: 480,
-          w: 400,
-          h: 80
+          x: nameX,
+          y: nameY,
+          w: nameW,
+          h: nameH
         },
-        48,
+        nameMaxSize,
         24,
-        '700',
-        '#111111'
+        nameWeight,
+        nameColor
       );
 
-      // Draw role text - Fixed positioning and size for perfect alignment  
+      // Draw role text using template coordinates with fallbacks
       drawTextFit(
         ctx,
         role,
         {
-          x: 170,
-          y: 540,
-          w: 300,
-          h: 60
+          x: roleX,
+          y: roleY,
+          w: roleW,
+          h: roleH
         },
-        36,
+        roleMaxSize,
         18,
-        '600',
-        '#111111'
+        roleWeight,
+        roleColor
       );
 
       onRender?.(true);
