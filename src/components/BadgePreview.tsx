@@ -55,9 +55,9 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         throw new Error('Could not get canvas context');
       }
 
-      // Set canvas size to fixed print dimensions (2.125" x 3.375" at 300 DPI) - Portrait orientation
-      canvas.width = 638;
-      canvas.height = 1013;
+      // Set canvas size to template dimensions
+      canvas.width = template.width;
+      canvas.height = template.height;
 
       // Clear canvas
       ctx.fillStyle = '#ffffff';
@@ -67,7 +67,7 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
       if (template.file_url !== 'default-template') {
         try {
           const templateImg = await loadImage(template.file_url);
-          ctx.drawImage(templateImg, 0, 0, 638, 1013);
+          ctx.drawImage(templateImg, 0, 0, template.width, template.height);
         } catch (error) {
           console.warn('Could not load template image, using white background');
         }
@@ -83,47 +83,47 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         throw new Error('No photo provided');
       }
 
-      // Draw photo - Fixed positioning and size for perfect alignment
+      // Draw photo using template coordinates
       drawRoundedImage(
         ctx,
         photoImg,
-        175,  // x - centered horizontally
-        120,  // y - positioned from top
-        290,  // w - fixed width
-        340,  // h - fixed height
-        20    // radius - fixed corner radius
+        template.photo_x,
+        template.photo_y,
+        template.photo_w,
+        template.photo_h,
+        template.photo_radius
       );
 
-      // Draw name text - Fixed positioning and size for perfect alignment
+      // Draw name text using template coordinates
       drawTextFit(
         ctx,
         name,
         {
-          x: 120,
-          y: 480,
-          w: 400,
-          h: 80
+          x: template.name_x,
+          y: template.name_y,
+          w: template.name_w,
+          h: template.name_h
         },
-        48,
-        24,
-        '700',
-        '#111111'
+        template.name_max_size,
+        Math.floor(template.name_max_size / 2),
+        template.name_weight,
+        template.name_color
       );
 
-      // Draw role text - Fixed positioning and size for perfect alignment  
+      // Draw role text using template coordinates
       drawTextFit(
         ctx,
         role,
         {
-          x: 170,
-          y: 540,
-          w: 300,
-          h: 60
+          x: template.role_x,
+          y: template.role_y,
+          w: template.role_w,
+          h: template.role_h
         },
-        36,
-        18,
-        '600',
-        '#111111'
+        template.role_max_size,
+        Math.floor(template.role_max_size / 2),
+        template.role_weight,
+        template.role_color
       );
 
       onRender?.(true);
@@ -164,7 +164,7 @@ export const BadgePreview = forwardRef<BadgePreviewRef, BadgePreviewProps>(({
         <canvas
           ref={canvasRef}
           className="max-w-full border rounded-lg shadow-lg bg-background"
-          style={{ aspectRatio: '638/1013' }}
+          style={{ aspectRatio: `${template?.width || 638}/${template?.height || 1013}` }}
         />
         
         {isRendering && (
